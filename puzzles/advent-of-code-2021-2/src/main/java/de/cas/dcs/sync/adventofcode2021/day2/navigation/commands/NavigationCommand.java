@@ -1,4 +1,6 @@
-package de.cas.dcs.sync.adventofcode2021.day2;
+package de.cas.dcs.sync.adventofcode2021.day2.navigation.commands;
+
+import de.cas.dcs.sync.adventofcode2021.day2.navigation.commands.CommandType;
 
 public class NavigationCommand {
 
