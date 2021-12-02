@@ -20,6 +20,7 @@
 
   <modules>
     <module>advent-of-code-2021-1</module>
+    <module>advent-of-code-2021-2</module>
   </modules>
 
   <dependencyManagement>
