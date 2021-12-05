@@ -24,6 +24,7 @@
     <module>advent-of-code-2021-2</module>
     <module>advent-of-code-2021-3</module>
     <module>advent-of-code-2021-4</module>
+    <module>advent-of-code-2021-5</module>
   </modules>
 
   <dependencyManagement>
