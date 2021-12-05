@@ -40,31 +40,29 @@ public class PartTwo {
 	}
 
 	private static void addLineToGrid(Line line, int[][] grid) {
-		Point start = line.start;
-		Point end = line.end;
+		Point start = line.start();
+		Point end = line.end();
 
-		Point currentPosition = new Point();
-		currentPosition.x = start.x;
-		currentPosition.y = start.y;
+		Point currentPosition = new Point(start.x(), start.y());
 
-		while(currentPosition.x != end.x || currentPosition.y != end.y) {
-			grid[currentPosition.x][currentPosition.y]++;
+		while(currentPosition.x() != end.x() || currentPosition.y() != end.y()) {
+			grid[currentPosition.x()][currentPosition.y()]++;
 
-			if(currentPosition.x > end.x) {
-				currentPosition.x--;
+			if(currentPosition.x() > end.x()) {
+				currentPosition = currentPosition.decreaseX();
 			}
-			if(currentPosition.x < end.x) {
-				currentPosition.x++;
+			if(currentPosition.x() < end.x()) {
+				currentPosition = currentPosition.increaseX();
 			}
-			if(currentPosition.y > end.y) {
-				currentPosition.y--;
+			if(currentPosition.y() > end.y()) {
+				currentPosition = currentPosition.decreaseY();
 			}
-			if(currentPosition.y < end.y) {
-				currentPosition.y++;
+			if(currentPosition.y() < end.y()) {
+				currentPosition = currentPosition.increaseY();
 			}
 		}
 
-		grid[currentPosition.x][currentPosition.y]++;
+		grid[currentPosition.x()][currentPosition.y()]++;
 
 	}
 }
