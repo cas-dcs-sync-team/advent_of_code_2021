@@ -10,24 +10,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PartTwoTest {
 
-	private Puzzle2 puzzle;
-	private CommandsProvider commandsProvider;
+  private Puzzle2 puzzle;
+  private CommandsProvider commandsProvider;
 
-	@BeforeEach
-	public void setup() {
-		puzzle = new PartTwo().getPuzzle2();
-		commandsProvider = new ResourceCommandsProvider();
-	}
+  @BeforeEach
+  public void setup() {
+    puzzle = new PartTwo().getPuzzle2();
+    commandsProvider = new ResourceCommandsProvider();
+  }
 
-	@Test
-	public void returnsExpectedResultTest() throws IOException {
-		// ARRANGE
-		int expectedResult = 1842742223;
+  @Test
+  public void returnsExpectedResultTest() throws IOException {
+    // ARRANGE
+    int expectedResult = 1842742223;
 
-		// ACT
-		int actualResult = puzzle.calculate(commandsProvider);
+    // ACT
+    int actualResult = puzzle.calculate(commandsProvider);
 
-		// ASSERT
-		assertEquals(expectedResult, actualResult);
-	}
+    // ASSERT
+    assertEquals(expectedResult, actualResult);
+  }
 }

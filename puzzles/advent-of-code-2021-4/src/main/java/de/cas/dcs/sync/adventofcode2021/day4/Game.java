@@ -4,5 +4,5 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Game {
-	Queue<Integer> numbersToDraw = new LinkedBlockingDeque<>();
+  Queue<Integer> numbersToDraw = new LinkedBlockingDeque<>();
 }

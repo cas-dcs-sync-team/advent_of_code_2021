@@ -6,28 +6,28 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PartOneTest {
 
-	private Puzzle2 puzzle;
-	private CommandsProvider commandsProvider;
+  private Puzzle2 puzzle;
+  private CommandsProvider commandsProvider;
 
-	@BeforeEach
-	public void setup() {
-		puzzle = new PartOne().getPuzzle2();
-		commandsProvider = new ResourceCommandsProvider();
-	}
+  @BeforeEach
+  public void setup() {
+    puzzle = new PartOne().getPuzzle2();
+    commandsProvider = new ResourceCommandsProvider();
+  }
 
-	@Test
-	public void returnsExpectedResultTest() throws IOException {
-		// ARRANGE
-		int expectedResult = 2150351;
+  @Test
+  public void returnsExpectedResultTest() throws IOException {
+    // ARRANGE
+    int expectedResult = 2150351;
 
-		// ACT
-		int actualResult = puzzle.calculate(commandsProvider);
+    // ACT
+    int actualResult = puzzle.calculate(commandsProvider);
 
-		// ASSERT
-		assertEquals(expectedResult, actualResult);
-	}
+    // ASSERT
+    assertEquals(expectedResult, actualResult);
+  }
 }

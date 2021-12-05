@@ -10,19 +10,17 @@ import java.util.stream.Collectors;
 
 public class DefaultCommandsProvider implements CommandsProvider {
 
-	private static final Path PUZZLE_RESOURCE = Paths.get("puzzle_resources/day2/day2.file");
+  private static final Path PUZZLE_RESOURCE = Paths.get("puzzle_resources/day2/day2.file");
 
-	@Override
-	public List<NavigationCommand> getNavigationCommands() throws IOException {
-		return Files.lines(PUZZLE_RESOURCE)
-				.map(s -> convert(s))
-				.collect(Collectors.toList());
-	}
+  @Override
+  public List<NavigationCommand> getNavigationCommands() throws IOException {
+    return Files.lines(PUZZLE_RESOURCE).map(s -> convert(s)).collect(Collectors.toList());
+  }
 
-	public NavigationCommand convert(String raw) {
-		String[] s = raw.split(" ");
-		CommandType type = CommandType.valueOf(s[0].toUpperCase(Locale.ROOT));
-		int value = Integer.parseInt(s[1]);
-		return new NavigationCommand(type, value);
-	}
+  public NavigationCommand convert(String raw) {
+    String[] s = raw.split(" ");
+    CommandType type = CommandType.valueOf(s[0].toUpperCase(Locale.ROOT));
+    int value = Integer.parseInt(s[1]);
+    return new NavigationCommand(type, value);
+  }
 }
