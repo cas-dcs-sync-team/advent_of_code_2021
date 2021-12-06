@@ -17,6 +17,7 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <junit.version>5.8.2</junit.version>
+    <jackson.version>2.13.0</jackson.version>
   </properties>
 
   <modules>
@@ -25,6 +26,7 @@
     <module>advent-of-code-2021-3</module>
     <module>advent-of-code-2021-4</module>
     <module>advent-of-code-2021-5</module>
+    <module>advent-of-code-2021-6</module>
   </modules>
 
   <dependencyManagement>
@@ -34,6 +36,21 @@
         <artifactId>junit-jupiter-api</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
