@@ -36,11 +36,8 @@ public class PartTwo {
       int fuelCost = 0;
       for (Integer crabPosition : values) {
         int pointsToMove = Math.abs(meetingPosition - crabPosition);
-        int fuelRate = 1;
-        for (int i = 0; i < pointsToMove; i++) {
-          fuelCost += fuelRate;
-          fuelRate++;
-        }
+        // use gaußsche sum formula to calculate increasing fuel costs
+        fuelCost = (pointsToMove * (pointsToMove + 1)) / 2;
       }
       if (fuelCost < minFuelCost) {
         minFuelCost = fuelCost;
