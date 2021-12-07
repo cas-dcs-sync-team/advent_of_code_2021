@@ -1,19 +1,27 @@
 package de.cas.dcs.sync.adventofcode2021.day7;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PartOne {
-  private static final Path PUZZLE_RESOURCE = Paths.get("puzzle_resources/day7/day7.file");
+  private static final String PUZZLE_RESOURCE_NAME = "day7.file";
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, URISyntaxException {
+    Path path = Paths.get(PartOne.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
+    Stream<String> lines = Files.lines(path);
+    System.out.println(execute(lines));
+  }
+
+  public static int execute(Stream<String> lines) {
     List<Integer> values =
-        Files.lines(PUZZLE_RESOURCE)
+        lines
             .flatMap(s -> Arrays.stream(s.split(",")))
             .map(Integer::parseInt)
             .sorted()
@@ -23,7 +31,6 @@ public class PartOne {
     int maxPosition = values.get(values.size() - 1);
 
     int minFuelCost = Integer.MAX_VALUE;
-    int minFuelCostMeetingPosition = Integer.MAX_VALUE;
 
     for (int meetingPosition = minPosition; meetingPosition <= maxPosition; meetingPosition++) {
       int fuelCost = 0;
@@ -32,14 +39,8 @@ public class PartOne {
       }
       if (fuelCost < minFuelCost) {
         minFuelCost = fuelCost;
-        minFuelCostMeetingPosition = meetingPosition;
       }
     }
-
-    System.out.println(minFuelCostMeetingPosition + " " + minFuelCost);
-  }
-
-  public static String execute(List<String> values) {
-    return "";
+    return minFuelCost;
   }
 }
