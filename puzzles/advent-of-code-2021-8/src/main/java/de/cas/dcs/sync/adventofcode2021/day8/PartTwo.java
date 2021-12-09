@@ -16,12 +16,6 @@ import static de.cas.dcs.sync.adventofcode2021.day8.Digit.*;
 
 public class PartTwo {
   private static final String PUZZLE_RESOURCE_NAME = "day8.file";
-  private static final List<Integer> searchedDigits =
-      Arrays.asList(
-          ONE_DIGIT_SEGEMTS_COUNT,
-          FOUR_DIGIT_SEGEMTS_COUNT,
-          SEVEN_DIGIT_SEGEMTS_COUNT,
-          EIGHT_DIGIT_SEGEMTS_COUNT);
 
   public static void main(String[] args) throws IOException, URISyntaxException {
     Path path = Paths.get(PartTwo.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
