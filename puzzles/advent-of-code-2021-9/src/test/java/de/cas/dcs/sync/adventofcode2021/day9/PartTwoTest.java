@@ -16,7 +16,7 @@ class PartTwoTest {
   @Test
   public void resultTest() throws IOException, URISyntaxException {
     // ARRANGE
-    int expectedResult = 0;
+    int expectedResult = 1134;
     Path path = Paths.get(this.getClass().getResource("/day9.file").toURI());
     Stream<String> lines = Files.lines(path);
 
