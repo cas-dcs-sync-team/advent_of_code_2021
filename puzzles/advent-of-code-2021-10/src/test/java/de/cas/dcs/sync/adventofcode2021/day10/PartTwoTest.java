@@ -1,4 +1,4 @@
-package de.cas.dcs.sync.adventofcode2021.day9;
+package de.cas.dcs.sync.adventofcode2021.day10;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,17 +11,17 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PartOneTest {
+class PartTwoTest {
 
   @Test
   public void resultTest() throws IOException, URISyntaxException {
     // ARRANGE
-    int expectedResult = 15;
+    long expectedResult = 288957;
     Path path = Paths.get(this.getClass().getResource("/day10.file").toURI());
     Stream<String> lines = Files.lines(path);
 
     // ACT
-    int actualResult = PartOne.execute(lines);
+    long actualResult = PartTwo.execute(lines);
 
     // ASSERT
     assertEquals(expectedResult, actualResult);

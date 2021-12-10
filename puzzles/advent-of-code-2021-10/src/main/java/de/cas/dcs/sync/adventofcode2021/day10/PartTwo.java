@@ -1,4 +1,4 @@
-package de.cas.dcs.sync.adventofcode2021.day9;
+package de.cas.dcs.sync.adventofcode2021.day10;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
