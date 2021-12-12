@@ -8,43 +8,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class PartOneTest {
 
-  @Test
-  public void smallTest() throws IOException, URISyntaxException {
+  @ParameterizedTest
+  @CsvSource({"day12-small.file,10", "day12-medium.file,19", "day12-large.file,226"})
+  public void resultTest(String resourceName, int expectedResult)
+      throws IOException, URISyntaxException {
     // ARRANGE
-    int expectedResult = 10;
-    Path path = Paths.get(this.getClass().getResource("/day12-small.file").toURI());
-    Stream<String> lines = Files.lines(path);
-
-    // ACT
-    long actualResult = new PartOne().execute(lines);
-
-    // ASSERT
-    assertEquals(expectedResult, actualResult);
-  }
-
-  @Test
-  public void largeTest() throws IOException, URISyntaxException {
-    // ARRANGE
-    int expectedResult = 226;
-    Path path = Paths.get(this.getClass().getResource("/day12-large.file").toURI());
-    Stream<String> lines = Files.lines(path);
-
-    // ACT
-    long actualResult = new PartOne().execute(lines);
-
-    // ASSERT
-    assertEquals(expectedResult, actualResult);
-  }
-
-  @Test
-  public void mediumTest() throws IOException, URISyntaxException {
-    // ARRANGE
-    int expectedResult = 19;
-    Path path = Paths.get(this.getClass().getResource("/day12-medium.file").toURI());
+    Path path = Paths.get(this.getClass().getResource("/" + resourceName).toURI());
     Stream<String> lines = Files.lines(path);
 
     // ACT
