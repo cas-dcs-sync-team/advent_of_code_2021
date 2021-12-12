@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Day12 {
   private static final String PUZZLE_RESOURCE_NAME = "day12.file";
@@ -19,17 +18,20 @@ public class Day12 {
 
   public static void main(String[] args) throws IOException, URISyntaxException {
     Path path = Paths.get(Day12.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
-    Stream<String> lines = Files.lines(path);
+    List<String> lines = Files.lines(path).collect(Collectors.toList());
+    partOne(lines);
     partTwo(lines);
   }
 
-  public static void partTwo(Stream<String> lines) {
+  public static void partOne(List<String> lines) {
+    System.out.println("partOne: " + new Day12().execute(lines, false));
+  }
+
+  public static void partTwo(List<String> lines) {
     System.out.println("partTwo: " + new Day12().execute(lines, true));
   }
 
-  public long execute(Stream<String> lines, boolean visistOneSmallCaveTwice) {
-
-    List<String> entries = lines.collect(Collectors.toList());
+  public long execute(List<String> entries, boolean visistOneSmallCaveTwice) {
 
     startPoints = getStartPoints(entries);
     endPoints = getEndPoints(entries);

@@ -7,7 +7,8 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -15,6 +16,9 @@ class Day12Test {
 
   @ParameterizedTest
   @CsvSource({
+    "day12-small.file,10,false",
+    "day12-medium.file,19,false",
+    "day12-large.file,226,false",
     "day12-small.file,36,true",
     "day12-medium.file,103,true",
     "day12-large.file,3509,true"
@@ -23,7 +27,7 @@ class Day12Test {
       throws IOException, URISyntaxException {
     // ARRANGE
     Path path = Paths.get(this.getClass().getResource("/" + resourceName).toURI());
-    Stream<String> lines = Files.lines(path);
+    List<String> lines = Files.lines(path).collect(Collectors.toList());
 
     // ACT
     long actualResult = new Day12().execute(lines, visistOneSmallCaveTwice);
