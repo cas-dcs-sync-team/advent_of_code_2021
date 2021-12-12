@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>advent-of-code-2021-6</artifactId>
+    <artifactId>advent-of-code-2021-03</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

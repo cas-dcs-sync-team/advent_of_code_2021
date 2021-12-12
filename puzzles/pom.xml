@@ -21,15 +21,15 @@
   </properties>
 
   <modules>
-    <module>advent-of-code-2021-1</module>
-    <module>advent-of-code-2021-2</module>
-    <module>advent-of-code-2021-3</module>
-    <module>advent-of-code-2021-4</module>
-    <module>advent-of-code-2021-5</module>
-    <module>advent-of-code-2021-6</module>
-    <module>advent-of-code-2021-7</module>
-    <module>advent-of-code-2021-8</module>
-    <module>advent-of-code-2021-9</module>
+    <module>advent-of-code-2021-01</module>
+    <module>advent-of-code-2021-02</module>
+    <module>advent-of-code-2021-03</module>
+    <module>advent-of-code-2021-04</module>
+    <module>advent-of-code-2021-05</module>
+    <module>advent-of-code-2021-06</module>
+    <module>advent-of-code-2021-07</module>
+    <module>advent-of-code-2021-08</module>
+    <module>advent-of-code-2021-09</module>
     <module>advent-of-code-2021-10</module>
     <module>advent-of-code-2021-11</module>
     <module>advent-of-code-2021-12</module>
