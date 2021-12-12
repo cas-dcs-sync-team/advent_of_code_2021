@@ -11,19 +11,23 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class PartTwo {
+public class Day12 {
   private static final String PUZZLE_RESOURCE_NAME = "day12.file";
   List<String> startPoints = null;
   List<String> endPoints = null;
   List<String> routePoints = null;
 
   public static void main(String[] args) throws IOException, URISyntaxException {
-    Path path = Paths.get(PartTwo.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
+    Path path = Paths.get(Day12.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
     Stream<String> lines = Files.lines(path);
-    System.out.println(new PartTwo().execute(lines));
+    partTwo(lines);
   }
 
-  public long execute(Stream<String> lines) {
+  public static void partTwo(Stream<String> lines) {
+    System.out.println("partTwo: " + new Day12().execute(lines, true));
+  }
+
+  public long execute(Stream<String> lines, boolean visistOneSmallCaveTwice) {
 
     List<String> entries = lines.collect(Collectors.toList());
 
@@ -36,7 +40,9 @@ public class PartTwo {
     for (String startPoint : startPoints) {
       List<String> currentRoute = new ArrayList<>();
       currentRoute.add(startPoint);
-      routes.addAll(resolveRoutingLvl(extractCaveFromStartPoint(startPoint), currentRoute, false));
+      routes.addAll(
+          resolveRoutingLvl(
+              extractCaveFromStartPoint(startPoint), currentRoute, !visistOneSmallCaveTwice));
     }
 
     return routes.size();

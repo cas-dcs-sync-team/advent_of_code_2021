@@ -11,18 +11,22 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class PartTwoTest {
+class Day12Test {
 
   @ParameterizedTest
-  @CsvSource({"day12-small.file,36", "day12-medium.file,103", "day12-large.file,3509"})
-  public void resultTest(String resourceName, int expectedResult)
+  @CsvSource({
+    "day12-small.file,36,true",
+    "day12-medium.file,103,true",
+    "day12-large.file,3509,true"
+  })
+  public void resulTest(String resourceName, int expectedResult, boolean visistOneSmallCaveTwice)
       throws IOException, URISyntaxException {
     // ARRANGE
     Path path = Paths.get(this.getClass().getResource("/" + resourceName).toURI());
     Stream<String> lines = Files.lines(path);
 
     // ACT
-    long actualResult = new PartTwo().execute(lines);
+    long actualResult = new Day12().execute(lines, visistOneSmallCaveTwice);
 
     // ASSERT
     assertEquals(expectedResult, actualResult);
