@@ -1,6 +1,7 @@
 package de.cas.dcs.sync.adventofcode2021.day13;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,13 +10,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day13Test {
 
   @ParameterizedTest
-  @CsvSource({"day13.file,false,0", "day13.file,true,0"})
+  @CsvSource({"day13.file,false,17", "day13.file,true,7"})
   public void resulTest(String resourceName, boolean partTwo, int expectedResult)
       throws IOException, URISyntaxException {
     // ARRANGE
