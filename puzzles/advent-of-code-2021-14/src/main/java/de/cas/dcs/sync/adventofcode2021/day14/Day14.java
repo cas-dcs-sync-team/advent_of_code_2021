@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class Day14 {
   private static final String PUZZLE_RESOURCE_NAME = "day14.file";
+  private Map<Rule, Long> rulesToMatchingPairs = Collections.emptyMap();
+  private Map<Character, Long> counts = new HashMap<>();
 
   public static void main(String[] args) throws IOException, URISyntaxException {
     Path path = Paths.get(Day14.class.getResource("/" + PUZZLE_RESOURCE_NAME).toURI());
@@ -31,65 +33,19 @@ public class Day14 {
 
     int steps = partTwo ? 40 : 10;
 
-    Map<Character, Long> counts = new HashMap<>();
-
     Template template = templates.get(0);
     List<Character> startCharacters = new ArrayList<>();
-    for (Character c : template.start().toCharArray()) {
-      startCharacters.add(c);
-      Long count = counts.getOrDefault(c, 0L);
-      counts.put(c, count + 1);
+
+    for (Character character : template.start().toCharArray()) {
+      startCharacters.add(character);
+      // count also the start characters
+      counts.compute(character, (key, value) -> increaseBy(value, 1));
     }
 
-    Map<Rule, Long> rulesToMatchingPairs = new HashMap<>();
-    template.rules().forEach(r -> rulesToMatchingPairs.put(r, 0L));
-
-    // init
-    for (int j = 0; j < startCharacters.size(); j++) {
-      if (j + 1 < startCharacters.size()) {
-        char startChar = startCharacters.get(j);
-        char endChar = startCharacters.get(j + 1);
-        Optional<Rule> transformRuleOpt =
-            getTransformRule(startChar, endChar, rulesToMatchingPairs.keySet());
-        if (transformRuleOpt.isPresent()) {
-          Rule rule = transformRuleOpt.get();
-          rulesToMatchingPairs.put(rule, rulesToMatchingPairs.get(rule) + 1);
-        }
-      }
-    }
+    rulesToMatchingPairs = initWithStartString(startCharacters, template.rules());
 
     for (int i = 0; i < steps; i++) {
-      Map<Rule, Long> newMatches = new HashMap<>();
-
-      for (Rule rule : rulesToMatchingPairs.keySet()) {
-
-        long currentRuleMatches = rulesToMatchingPairs.get(rule);
-
-        Optional<Rule> newRuleMatchOne =
-            getTransformRule(rule.start(), rule.add(), rulesToMatchingPairs.keySet());
-        Optional<Rule> newRuleMatchTwo =
-            getTransformRule(rule.add(), rule.end(), rulesToMatchingPairs.keySet());
-
-        Long count = counts.getOrDefault(rule.add(), 0L);
-        counts.put(rule.add(), count + currentRuleMatches);
-
-        if (newRuleMatchOne.isPresent()) {
-          Rule match = newRuleMatchOne.get();
-          newMatches.put(match, newMatches.getOrDefault(match, 0L) + currentRuleMatches);
-        }
-
-        if (newRuleMatchTwo.isPresent()) {
-          Rule match = newRuleMatchTwo.get();
-          newMatches.put(match, newMatches.getOrDefault(match, 0L) + currentRuleMatches);
-        }
-
-        // remove matches for current rules as the pair has been ripped apart
-        newMatches.put(rule, newMatches.getOrDefault(rule, 0L) - currentRuleMatches);
-      }
-
-      for (Rule rule : rulesToMatchingPairs.keySet()) {
-        rulesToMatchingPairs.put(rule, rulesToMatchingPairs.get(rule) + newMatches.get(rule));
-      }
+      executeStep();
     }
 
     long lowestCount = Long.MAX_VALUE;
@@ -105,6 +61,57 @@ public class Day14 {
     }
 
     return highestCount - lowestCount;
+  }
+
+  private void addRuleMatchesForNewPairs(
+      char start, char end, long currentRuleMatches, Map<Rule, Long> newMatches) {
+    getTransformRule(start, end, rulesToMatchingPairs.keySet())
+        .ifPresent(
+            rule ->
+                newMatches.compute(rule, (key, value) -> increaseBy(value, currentRuleMatches)));
+  }
+
+  private void executeStep() {
+    Map<Rule, Long> newMatches = new HashMap<>();
+
+    for (Rule rule : rulesToMatchingPairs.keySet()) {
+
+      long currentRuleMatches = rulesToMatchingPairs.get(rule);
+
+      // increase count for added characters
+      counts.compute(rule.newCharacter(), (key, value) -> increaseBy(value, currentRuleMatches));
+
+      addRuleMatchesForNewPairs(rule.start(), rule.newCharacter(), currentRuleMatches, newMatches);
+      addRuleMatchesForNewPairs(rule.newCharacter(), rule.end(), currentRuleMatches, newMatches);
+
+      // remove matches for current rules as the pair has been ripped apart
+      newMatches.compute(rule, (key, value) -> increaseBy(value, -currentRuleMatches));
+    }
+
+    // merge pair matches from current step into global state
+    for (Rule rule : rulesToMatchingPairs.keySet()) {
+      rulesToMatchingPairs.put(rule, rulesToMatchingPairs.get(rule) + newMatches.get(rule));
+    }
+  }
+
+  private Map<Rule, Long> initWithStartString(List<Character> startCharacters, List<Rule> rules) {
+    Map<Rule, Long> rulesToMatchingPairs = new HashMap<>();
+    rules.forEach(r -> rulesToMatchingPairs.put(r, 0L));
+
+    // init
+    for (int j = 0; j < startCharacters.size(); j++) {
+      if (j + 1 < startCharacters.size()) {
+        char startChar = startCharacters.get(j);
+        char endChar = startCharacters.get(j + 1);
+        Optional<Rule> transformRuleOpt =
+            getTransformRule(startChar, endChar, rulesToMatchingPairs.keySet());
+        if (transformRuleOpt.isPresent()) {
+          Rule rule = transformRuleOpt.get();
+          rulesToMatchingPairs.put(rule, rulesToMatchingPairs.get(rule) + 1);
+        }
+      }
+    }
+    return rulesToMatchingPairs;
   }
 
   private Optional<Rule> getTransformRule(char startChar, char endChar, Set<Rule> rules) {
@@ -134,5 +141,9 @@ public class Day14 {
 
   private boolean isNewEntryStarting(String line) {
     return !line.isBlank() && !line.contains("->");
+  }
+
+  private Long increaseBy(Long currentValue, long toAdd) {
+    return currentValue == null ? toAdd : currentValue + toAdd;
   }
 }
