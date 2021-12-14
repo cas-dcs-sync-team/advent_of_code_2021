@@ -45,7 +45,7 @@ public class Day14 {
     rulesToMatchingPairs = initWithStartString(startCharacters, template.rules());
 
     for (int i = 0; i < steps; i++) {
-      executeStep();
+      applyRulesToPairs();
     }
 
     long lowestCount = Long.MAX_VALUE;
@@ -71,7 +71,7 @@ public class Day14 {
                 newMatches.compute(rule, (key, value) -> increaseBy(value, currentRuleMatches)));
   }
 
-  private void executeStep() {
+  private void applyRulesToPairs() {
     Map<Rule, Long> newMatches = new HashMap<>();
 
     for (Rule rule : rulesToMatchingPairs.keySet()) {
