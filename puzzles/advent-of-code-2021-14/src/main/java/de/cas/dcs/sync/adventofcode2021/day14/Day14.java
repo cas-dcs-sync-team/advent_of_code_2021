@@ -48,17 +48,8 @@ public class Day14 {
       applyRulesToPairs();
     }
 
-    long lowestCount = Long.MAX_VALUE;
-    long highestCount = Long.MIN_VALUE;
-
-    for (long count : counts.values()) {
-      if (count > highestCount) {
-        highestCount = count;
-      }
-      if (count < lowestCount) {
-        lowestCount = count;
-      }
-    }
+    long lowestCount = counts.values().stream().mapToLong(Long::valueOf).min().orElseThrow();
+    long highestCount = counts.values().stream().mapToLong(Long::valueOf).max().orElseThrow();
 
     return highestCount - lowestCount;
   }
