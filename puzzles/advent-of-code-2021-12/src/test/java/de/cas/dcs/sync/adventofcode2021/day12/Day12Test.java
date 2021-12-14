@@ -1,6 +1,7 @@
 package de.cas.dcs.sync.adventofcode2021.day12;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,8 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day12Test {
 
@@ -23,7 +24,7 @@ class Day12Test {
     "day12-medium.file,103,true",
     "day12-large.file,3509,true"
   })
-  public void resulTest(String resourceName, int expectedResult, boolean visistOneSmallCaveTwice)
+  public void resultTest(String resourceName, int expectedResult, boolean visistOneSmallCaveTwice)
       throws IOException, URISyntaxException {
     // ARRANGE
     Path path = Paths.get(this.getClass().getResource("/" + resourceName).toURI());

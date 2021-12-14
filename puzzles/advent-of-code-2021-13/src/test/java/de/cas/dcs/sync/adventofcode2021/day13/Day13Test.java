@@ -17,7 +17,7 @@ class Day13Test {
 
   @ParameterizedTest
   @CsvSource({"day13.file,false,17", "day13.file,true,7"})
-  public void resulTest(String resourceName, boolean partTwo, int expectedResult)
+  public void resultTest(String resourceName, boolean partTwo, int expectedResult)
       throws IOException, URISyntaxException {
     // ARRANGE
     Path path = Paths.get(this.getClass().getResource("/" + resourceName).toURI());
