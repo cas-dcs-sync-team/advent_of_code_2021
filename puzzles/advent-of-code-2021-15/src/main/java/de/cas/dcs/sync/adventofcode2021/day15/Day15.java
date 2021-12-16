@@ -40,6 +40,7 @@ public class Day15 {
 
     Point endPoint = createPoint(grid[0].length - 1, grid.length - 1, grid, allPoints);
 
+    // thanks for the little refresher: https://www.baeldung.com/java-dijkstra
     while (unresolvedPoints.size() != 0) {
       Point currentPoint = getPointWithLowestTotalRisk(unresolvedPoints);
       unresolvedPoints.remove(currentPoint);
