@@ -36,6 +36,7 @@
     <module>advent-of-code-2021-13</module>
     <module>advent-of-code-2021-14</module>
     <module>advent-of-code-2021-15</module>
+    <module>advent-of-code-2021-16</module>
   </modules>
 
   <dependencyManagement>
